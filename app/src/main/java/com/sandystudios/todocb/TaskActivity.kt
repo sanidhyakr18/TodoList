@@ -23,19 +23,19 @@ const val DB_NAME = "todo.db"
 
 class TaskActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var myCalendar: Calendar
+    private lateinit var myCalendar: Calendar
 
-    lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
-    lateinit var timeSetListener: TimePickerDialog.OnTimeSetListener
+    private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
+    private lateinit var timeSetListener: TimePickerDialog.OnTimeSetListener
 
-    var finalDate = 0L
+    private var finalDate = 0L
     var finalTime = 0L
 
 
     private val labels = arrayListOf("Personal", "Work", "Health", "Banking", "Others")
 
 
-    val db by lazy {
+    private val db by lazy {
         AppDatabase.getDatabase(this)
     }
 
@@ -68,10 +68,10 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         spinnerCategory.adapter = adapter
     }
 
-    override fun onClick(v: View) {
-        when (v.id) {
+    override fun onClick(v: View?) {
+        when (v?.id) {
             R.id.dateEdt -> {
-                setListener()
+                setDateListener()
             }
             R.id.timeEdt -> {
                 setTimeListener()
@@ -80,7 +80,6 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
                 saveTodo()
             }
         }
-
     }
 
     private fun saveTodo() {
@@ -108,58 +107,60 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun setTimeListener() {
-        myCalendar = Calendar.getInstance()
-
-        timeSetListener =
-            TimePickerDialog.OnTimeSetListener() { _: TimePicker, hourOfDay: Int, min: Int ->
-                myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-                myCalendar.set(Calendar.MINUTE, min)
-                updateTime()
-            }
-
-        val timePickerDialog = TimePickerDialog(
-            this, timeSetListener, myCalendar.get(Calendar.HOUR_OF_DAY),
-            myCalendar.get(Calendar.MINUTE), false
-        )
-        timePickerDialog.show()
-    }
-
-    private fun updateTime() {
-        //Mon, 5 Jan 2020
-        val myformat = "h:mm a"
-        val sdf = SimpleDateFormat(myformat)
-        finalTime = myCalendar.time.time
-        timeEdt.setText(sdf.format(myCalendar.time))
-
-    }
-
-    private fun setListener() {
+    private fun setDateListener() {
         myCalendar = Calendar.getInstance()
 
         dateSetListener =
             DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-                myCalendar.set(Calendar.YEAR, year)
-                myCalendar.set(Calendar.MONTH, month)
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                myCalendar.set(year, month, dayOfMonth)
                 updateDate()
-
             }
 
         val datePickerDialog = DatePickerDialog(
-            this, dateSetListener, myCalendar.get(Calendar.YEAR),
-            myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)
+            this,
+            dateSetListener,
+            myCalendar.get(Calendar.YEAR),
+            myCalendar.get(Calendar.MONTH),
+            myCalendar.get(Calendar.DAY_OF_MONTH)
         )
+
         datePickerDialog.datePicker.minDate = System.currentTimeMillis()
         datePickerDialog.show()
     }
 
+    private fun setTimeListener() {
+        myCalendar = Calendar.getInstance()
+
+        timeSetListener =
+            TimePickerDialog.OnTimeSetListener { _: TimePicker, hourOfDay: Int, minute: Int ->
+                myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                myCalendar.set(Calendar.MINUTE, minute)
+                updateTime()
+            }
+
+        val timePickerDialog = TimePickerDialog(
+            this,
+            timeSetListener,
+            myCalendar.get(Calendar.HOUR_OF_DAY),
+            myCalendar.get(Calendar.MINUTE),
+            false
+        )
+
+        timePickerDialog.show()
+    }
+
     private fun updateDate() {
-        //Mon, 5 Jan 2020
-        val myformat = "EEE, d MMM yyyy"
-        val sdf = SimpleDateFormat(myformat)
+        val myFormat = "EEE, dd/MM/yy"
+        val sdf = SimpleDateFormat(myFormat, Locale.getDefault())
         finalDate = myCalendar.time.time
         dateEdt.setText(sdf.format(myCalendar.time))
+    }
+
+    private fun updateTime() {
+        val myFormat = "h:mm a"
+        val sdf = SimpleDateFormat(myFormat, Locale.getDefault())
+        finalTime = myCalendar.time.time
+        timeEdt.setText(sdf.format(myCalendar.time))
     }
 
 }

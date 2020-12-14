@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    val list = arrayListOf<TodoModel>()
+    private val list = arrayListOf<TodoModel>()
     var adapter = TodoAdapter(list)
 
     val db by lazy {
@@ -50,11 +50,9 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
         })
-
-
     }
 
-    fun initSwipe() {
+    private fun initSwipe() {
         val simpleItemTouchCallback = object : ItemTouchHelper.SimpleCallback(
                 0,
                 ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -132,7 +130,6 @@ class MainActivity : AppCompatActivity() {
                     }
                     viewHolder.itemView.translationX = dX
 
-
                 } else {
                     super.onChildDraw(
                             canvas,
@@ -145,8 +142,6 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
             }
-
-
         }
 
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)

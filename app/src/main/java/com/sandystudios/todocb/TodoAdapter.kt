@@ -5,12 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_task.*
+import kotlinx.android.synthetic.main.activity_task.view.*
 import kotlinx.android.synthetic.main.item_todo.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TodoAdapter(val list: List<TodoModel>) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
-
+class TodoAdapter(private val list: List<TodoModel>) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(
@@ -44,20 +44,17 @@ class TodoAdapter(val list: List<TodoModel>) : RecyclerView.Adapter<TodoAdapter.
 
             }
         }
-        private fun updateTime(time: Long) {
-            //Mon, 5 Jan 2020
-            val myformat = "h:mm a"
-            val sdf = SimpleDateFormat(myformat)
-            itemView.txtShowTime.text = sdf.format(Date(time))
 
+        private fun updateDate(date: Long) {
+            val myFormat = "EEE, dd/MM/yy"
+            val sdf = SimpleDateFormat(myFormat, Locale.getDefault())
+            itemView.txtShowDate.text = sdf.format(Date(date))
         }
 
-        private fun updateDate(time: Long) {
-            //Mon, 5 Jan 2020
-            val myformat = "EEE, d MMM yyyy"
-            val sdf = SimpleDateFormat(myformat)
-            itemView.txtShowDate.text = sdf.format(Date(time))
-
+        private fun updateTime(time: Long) {
+            val myFormat = "h:mm a"
+            val sdf = SimpleDateFormat(myFormat, Locale.getDefault())
+            itemView.txtShowTime.text = sdf.format(Date(time))
         }
     }
 
