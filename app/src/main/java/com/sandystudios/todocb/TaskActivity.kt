@@ -30,9 +30,7 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     private var finalDate = 0L
     private var finalTime = 0L
 
-
     private val labels = arrayListOf("Personal", "Work", "Health", "Banking", "Others")
-
 
     private val db by lazy {
         AppDatabase.getDatabase(this)

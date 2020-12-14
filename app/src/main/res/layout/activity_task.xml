@@ -74,11 +74,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:hint="@string/enter_description"
-                android:inputType="textCapSentences"
-                android:lines="3"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines="5"
+                android:minLines="1"
+
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:scrollHorizontally="false"
+                android:scrollbars="vertical"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView

@@ -36,7 +36,7 @@ class AboutActivity : AppCompatActivity() {
         emailIntent.apply {
             addCategory(Intent.CATEGORY_BROWSABLE);
             data = Uri.parse("mailto:$emailId")
-            putExtra(Intent.EXTRA_SUBJECT,"Implicit Intents")
+            putExtra(Intent.EXTRA_SUBJECT, "Implicit Intents")
         }
 
         val linkedIn: Element = Element().setTitle("LinkedIn")
@@ -50,7 +50,7 @@ class AboutActivity : AppCompatActivity() {
 
         val aboutPage = AboutPage(this)
             .setImage(R.drawable.ic_icon)
-            .setDescription("This is a simple ToDo app with minimal features and a clean appealing UI. ")
+            .setDescription("This is a simple To-Do app with a clean & appealing UI with features like search and swipe action.")
             .addGroup("Connect with me")
             .addGitHub(id, "Github")
             .addItem(linkedIn)
