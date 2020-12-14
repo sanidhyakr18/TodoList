@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val view: View = window.decorView
         view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         setSupportActionBar(toolbar)
-        todoRv.apply {
+        todoRV.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = this@MainActivity.adapter
         }
@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(todoRv)
+        itemTouchHelper.attachToRecyclerView(todoRV)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

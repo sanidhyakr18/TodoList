@@ -3,6 +3,7 @@ package com.sandystudios.todocb
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -40,6 +41,9 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task)
+        setSupportActionBar(newTaskToolbar)
+        title = "New Task"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         dateEdt.setOnClickListener(this)
         timeEdt.setOnClickListener(this)
@@ -47,6 +51,15 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
 
 
         setUpSpinner()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setUpSpinner() {
