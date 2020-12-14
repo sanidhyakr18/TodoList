@@ -200,7 +200,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.about -> {
-                startActivity(Intent(this, HistoryActivity::class.java))
+                startActivity(Intent(this, AboutActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)
