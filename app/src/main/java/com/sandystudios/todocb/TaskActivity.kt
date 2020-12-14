@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.RadioButton
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
@@ -31,7 +32,7 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     var finalTime = 0L
 
 
-    private val labels = arrayListOf("Personal", "Business", "Insurance", "Shopping", "Banking")
+    private val labels = arrayListOf("Personal", "Work", "Health", "Banking", "Others")
 
 
     val db by lazy {
@@ -49,7 +50,6 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         timeEdt.setOnClickListener(this)
         saveBtn.setOnClickListener(this)
 
-
         setUpSpinner()
     }
 
@@ -65,9 +65,6 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     private fun setUpSpinner() {
         val adapter =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, labels)
-
-        labels.sort()
-
         spinnerCategory.adapter = adapter
     }
 
@@ -90,7 +87,9 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         val category = spinnerCategory.selectedItem.toString()
         val title = titleInpLay.editText?.text.toString()
         val description = taskInpLay.editText?.text.toString()
-
+        val radioButtonID = priorityInput.checkedRadioButtonId
+        val checkRadioButton = findViewById<RadioButton>(radioButtonID)
+        val rbText = checkRadioButton.text.toString()
         GlobalScope.launch(Dispatchers.Main) {
             val id = withContext(Dispatchers.IO) {
                 return@withContext db.todoDao().insertTask(
@@ -98,6 +97,7 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
                         title = title,
                         description = description,
                         category = category,
+                        priority = rbText,
                         date = finalDate,
                         time = finalTime
                     )
