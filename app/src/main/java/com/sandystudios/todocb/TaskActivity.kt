@@ -10,7 +10,6 @@ import android.widget.DatePicker
 import android.widget.RadioButton
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_task.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -29,7 +28,7 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var timeSetListener: TimePickerDialog.OnTimeSetListener
 
     private var finalDate = 0L
-    var finalTime = 0L
+    private var finalTime = 0L
 
 
     private val labels = arrayListOf("Personal", "Work", "Health", "Banking", "Others")
@@ -64,7 +63,7 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setUpSpinner() {
         val adapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, labels)
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, labels)
         spinnerCategory.adapter = adapter
     }
 
@@ -90,7 +89,7 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         val checkRadioButton = findViewById<RadioButton>(radioButtonID)
         val rbText = checkRadioButton.text.toString()
         GlobalScope.launch(Dispatchers.Main) {
-            val id = withContext(Dispatchers.IO) {
+            withContext(Dispatchers.IO) {
                 return@withContext db.todoDao().insertTask(
                     TodoModel(
                         title = title,
@@ -104,7 +103,6 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
             }
             finish()
         }
-
     }
 
     private fun setDateListener() {
