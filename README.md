@@ -1,6 +1,12 @@
 # TodoList
 
-This is a simple To-Do app with a clean appealing UI with search and swipe feature.
+A simple To-Do List App using Room DB.
+
+Features: 
+* Create a New Task
+* Search Task
+* Swipe to mark as done/delete 
+* Auto-generate background color of tasks
 
 # Screenshots:
 
