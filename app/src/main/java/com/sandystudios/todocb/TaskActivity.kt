@@ -160,9 +160,6 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         val sdf = SimpleDateFormat(myformat)
         finalDate = myCalendar.time.time
         dateEdt.setText(sdf.format(myCalendar.time))
-
-        timeInptLay.visibility = View.VISIBLE
-
     }
 
 }
