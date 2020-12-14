@@ -199,7 +199,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.history -> {
+            R.id.about -> {
                 startActivity(Intent(this, HistoryActivity::class.java))
             }
         }
