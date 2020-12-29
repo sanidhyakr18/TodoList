@@ -8,6 +8,8 @@ Features:
 * Swipe to mark as done/delete 
 * Auto-generate background color of tasks
 
+More features will be added soon...
+
 # Screenshots:
 
  <img src="https://user-images.githubusercontent.com/54947362/102042197-447a1500-3df7-11eb-88dc-4524212c2299.jpeg" height="400">    <img src="https://user-images.githubusercontent.com/54947362/102042646-5f00be00-3df8-11eb-9df3-e43dac5fb1bb.jpeg" height="400">    <img src="https://user-images.githubusercontent.com/54947362/102042648-6031eb00-3df8-11eb-9254-a74130eebfee.jpeg" height="400">
