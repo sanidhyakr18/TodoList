@@ -1,12 +1,12 @@
 # TodoList
 
-A simple To-Do List App using Room DB.
-
-Features: 
+A simple To-Do List Android App developed in Kotlin
 * Create a New Task
 * Search Task
-* Swipe to mark as done/delete 
 * Auto-generate background color of tasks
+* Features swipe gestures to mark as complete or delete TODO and recycler view animations
+* Used RoomDB, LiveData, Coroutines and Material Design Components
+
 
 More features will be added soon...
 
